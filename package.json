@@ -1,0 +1,29 @@
+{
+  "name": "git",
+  "version": "1.0.0",
+  "description": "\"# UserPostBack\"",
+  "main": "server.js",
+  "scripts": {
+    "watch": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VictorNail/UserPostBack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VictorNail/UserPostBack/issues"
+  },
+  "homepage": "https://github.com/VictorNail/UserPostBack#readme",
+  "dependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mysql2": "^3.2.0",
+    "nodemon": "^2.0.22",
+    "sequelize": "^6.30.0"
+  }
+}
