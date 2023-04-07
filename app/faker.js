@@ -3,12 +3,7 @@ const db = require("./models");
 const Users = db.Users;
 const Posts = db.Posts;
 const Reactions = db.Reactions;
-
-exports.test = function () {
-  const randomName = faker.name.fullName(); // Rowan Nikolaus
-  const randomEmail = faker.internet.userName(); // Kassandra.Haley@erich.biz
-  console.log(randomName, randomEmail);
-};
+const Reports = db.Reports;
 
 exports.generateUsers = async function (numberOfUsers) {
   for (let i = 0; i < numberOfUsers; i++) {
@@ -46,21 +41,47 @@ exports.generatePosts = async function (numberOfPosts) {
 };
 
 exports.generateReactions = async function (numberOfReactions) {
-    const posts = await Posts.findAll();
-    const postsIds = posts.map((post) => post.id);
+  const posts = await Posts.findAll();
+  const postsIds = posts.map((post) => post.id);
 
-    const users = await Users.findAll();
-    const usersID = users.map((user) => user.id);
+  const users = await Users.findAll();
+  const usersID = users.map((user) => user.id);
 
-    for (let i = 0; i < posts.length; i++) {
-        for(let t = 0; t < numberOfReactions; t++){
-            let typeGenerate = "LIKE";
-            if(Math.floor(Math.random() * 2) === 1)typeGenerate="DISLIKE";
-            Reactions.create({
-                type: typeGenerate,
-                post_id: postsIds[i],
-                user_id: usersID[t]
-            });
-        }
+  for (let i = 0; i < posts.length; i++) {
+    for (let t = 0; t < numberOfReactions; t++) {
+      let typeGenerate = "LIKE";
+      if (Math.floor(Math.random() * 2) === 1) typeGenerate = "DISLIKE";
+      Reactions.create({
+        type: typeGenerate,
+        post_id: postsIds[i],
+        user_id: usersID[t],
+      });
     }
+  }
+};
+
+exports.generateReports = async function (numberOfReports) {
+  const posts = await Posts.findAll();
+  const postsIds = posts.map((post) => post.id);
+
+  const users = await Users.findAll();
+  const usersID = users.map((user) => user.id);
+  let incr = 0;
+  while (incr < numberOfReports) {
+
+    const randomPostId = postsIds[Math.floor(Math.random() * postsIds.length)];
+    const randomUserId = usersID[Math.floor(Math.random() * usersID.length)];
+
+    const reportExist = await Reports.findOne({
+      where: { post_id: randomPostId, user_id: randomUserId },
+    });
+    if (!reportExist) {
+      Reports.create({
+        reason: faker.lorem.words(10),
+        post_id: randomPostId,
+        user_id: randomUserId,
+      });
+      incr++;
+    }
+  }
 };
