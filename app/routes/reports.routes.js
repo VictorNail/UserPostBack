@@ -6,9 +6,9 @@ module.exports = app => {
     // Create a new Reports
     router.post("/", Reports.create);
   
-    router.get("/:id/posts", Reports.findByPostId);
+    router.get("/:id/post", Reports.findByPostId);
 
-    router.get("/:id/users", Reports.findByUserId);
+    router.get("/:id/user", Reports.findByUserId);
 
     router.get("/users", Reports.userWithReports)
 
