@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c4115888-f00d-45ec-8a98-5afd99755fcb",
+		"_postman_id": "f51bd859-4fd0-4770-b8e0-b128a6cada7a",
 		"name": "DB SDV",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -262,7 +262,20 @@
 					"name": "Récupère tous les Users qui ont fait un Report",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/reports/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"reports",
+								"users"
+							]
+						}
 					},
 					"response": []
 				},
